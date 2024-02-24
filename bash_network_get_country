@@ -1,0 +1,12 @@
+this is a bash func to get requesting network geo_country code 
+
+Get_Download_Url_Domain() {
+    # Use ipconfig.io/country and https://ifconfig.io/country_code to get the country code
+    REGION=$(${sudo_cmd} curl --connect-timeout 2 -s ipconfig.io/country || echo "")
+    if [ "${REGION}" = "" ]; then
+       REGION=$(${sudo_cmd} curl --connect-timeout 2 -s https://ifconfig.io/country_code || echo "")
+    fi
+    if [[ "${REGION}" = "China" ]] || [[ "${REGION}" = "CN" ]]; then
+        CASA_DOWNLOAD_DOMAIN="https://casaos.oss-cn-shanghai.aliyuncs.com/"
+    fi
+}
